@@ -1,0 +1,37 @@
+<ion-content class="gradient-bg">
+  <div class="login-block">
+    <div class="desktop">
+      <div  class="top-block">
+        <div class="ipoll-title">
+          <h3>No need to stress,</h3>
+          <p>we got this under control</p>
+        </div>
+      </div>
+      <div class="middle-block">
+        <form class="content">
+            <ion-item>
+              <ion-label stacked color="light">Your Email</ion-label>
+              <ion-input type="email" name="email" [(ngModel)]="email" ></ion-input>
+            </ion-item>
+
+            <div padding>
+              <button (click)="SendNow(email)" color="light" ion-button block outline round>
+                Send
+              </button>
+            </div>
+
+        </form>
+      </div>
+      <div class="bottom-block">
+        <div class="content" style="width:100%;display:flex">
+          <div style="width:50%;text-align:left">
+            <button (click)="Login()" color="light" class="btn-small" ion-button small clear>LOGIN</button>
+          </div>
+          <div style="width:50%;text-align:right">
+            <button (click)="Register()" color="light" class="btn-small" ion-button small clear>REGISTER HERE</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

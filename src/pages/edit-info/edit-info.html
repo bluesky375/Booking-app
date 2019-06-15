@@ -1,0 +1,30 @@
+<ion-header no-border>
+  <ion-navbar color="primary">
+    <ion-title>Edit Personal Info</ion-title>
+    <ion-buttons end>
+      <button ion-button="" clear (click)="dismiss()" icon-only="">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+<ion-slides>
+  <ion-slide id="slide5" padding="" class="slide-w">
+    <div class="content">
+      <h3>USERNAME</h3>
+      <form novalidate class="order-modal">
+
+          <ion-item>
+            <ion-input type="text" name="username" placeholder="Username" [(ngModel)]="username"></ion-input>
+          </ion-item>
+
+          <div padding>
+            <button ion-button color="primary" (click)="SubmitForm()" block round>SUBMIT</button>
+          </div>
+
+      </form>
+    </div>
+  </ion-slide>
+</ion-slides>
+</ion-content>

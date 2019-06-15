@@ -1,0 +1,100 @@
+<ion-slides (ionSlideDidChange)="slideChanged()" pager>
+  <ion-slide id="slide2" class="gradient-bg" padding>
+    <div class="content">
+      <ion-icon class="n-icon" name="ios-contact"></ion-icon>
+      <h3 class="light">PLEASE ENTER YOUR NAME</h3>
+      <div class="order-modal">
+          <ion-item>
+            <ion-input type="text" name="username" placeholder="Aditek?" [(ngModel)]="username"></ion-input>
+          </ion-item>
+
+        <div padding>
+          <button (click)="next('2')" color="light" icon-right ion-button block outline round>
+            NEXT
+            <ion-icon ios="ios-arrow-round-forward" md="ios-arrow-round-forward"></ion-icon>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </ion-slide>
+  <ion-slide id="slide3" class="gradient-bg" padding>
+    <div class="content">
+      <ion-icon class="n-icon n-icon1" name="ios-call"></ion-icon>
+      <h3>YOUR PHONE NUMBER?</h3>
+      <div class="order-modal">
+
+          <ion-item class="n-select">
+            <ion-select [(ngModel)]="code">
+              <ion-option *ngFor="let code of codes" [value]="code.code">{{code.name}}</ion-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>{{code}}</ion-label>
+            <ion-input type="number" name="number" [(ngModel)]="number"></ion-input>
+          </ion-item>
+
+          <div padding>
+            <button (click)="next('3')" color="light" icon-right ion-button block outline round>
+              NEXT
+              <ion-icon ios="ios-arrow-round-forward" md="ios-arrow-round-forward"></ion-icon>
+            </button>
+          </div>
+
+      </div>
+    </div>
+  </ion-slide>
+  <ion-slide id="slide4" class="gradient-bg" padding>
+    <div class="content" text-center>
+      <h3>ENTER VERIFICATION CODE</h3>
+      <p class="change"> <span *ngIf="!passed30">1:</span>{{timer}}</p>
+      <div class="order-modal">
+
+          <ion-item>
+            <ion-input type="text" name="code" placeholder="Code" [(ngModel)]="Vcode"></ion-input>
+          </ion-item>
+
+          <div padding>
+            <button (click)="SubmitCode()" color="light" ion-button block outline round>
+              VERIFY
+            </button>
+          </div>
+
+          <div padding>
+          <button type="button" class="bold" ion-button block clear color="light" (click)="SwitchNumber();">
+            CHANGE NUMBER
+          </button>
+          </div>
+
+      </div>
+    </div>
+  </ion-slide>
+  <ion-slide id="slide5" class="gradient-bg" padding>
+    <div class="content">
+      <h3>ONE LAST STEP!</h3>
+      <div class="order-modal">
+
+          <ion-item>
+            <ion-input type="email" name="email" placeholder="Email" [(ngModel)]="email"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-input type="password" name="password" placeholder="Password" [(ngModel)]="password"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-input type="password" name="password" placeholder="Repeat Password" [(ngModel)]="password2"></ion-input>
+          </ion-item>
+
+          <div padding>
+            <button (click)="Submit()" color="light" ion-button block outline round>
+              DONE
+            </button>
+          </div>
+
+      </div>
+    </div>
+  </ion-slide>
+
+</ion-slides>

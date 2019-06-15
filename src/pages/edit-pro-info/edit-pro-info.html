@@ -1,0 +1,39 @@
+<ion-header no-border>
+  <ion-navbar color="primary">
+    <ion-title>Edit Personal Info</ion-title>
+    <ion-buttons end>
+      <button ion-button="" clear (click)="dismiss()" icon-only="">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+
+    <div class="content">
+
+        <ion-item>
+          <ion-label stacked color="primary">Full name</ion-label>
+          <ion-input type="text" name="name" [(ngModel)]="provider.name"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label stacked color="primary">Job Title</ion-label>
+          <ion-input type="text" name="title" [(ngModel)]="provider.title"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label stacked color="primary">Address</ion-label>
+          <ion-input type="text" name="description" [(ngModel)]="provider.description"></ion-input>
+        </ion-item>
+
+        <div>
+          <div #map class="map" id="map"></div>
+        </div>
+
+        <div padding="">
+          <button ion-button color="primary" (click)="SubmitForm()" block round>SUBMIT</button>
+        </div>
+
+    </div>
+</ion-content>

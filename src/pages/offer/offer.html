@@ -1,0 +1,45 @@
+<ion-header no-border>
+  <ion-navbar color="primary">
+    <ion-title> {{category.name}}</ion-title>
+    <ion-buttons end>
+      <button ion-button="" clear (click)="dismiss()" icon-only="">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <div class="card-img">
+    <img [src]="offer.url" />
+  </div>
+
+
+  <section class="content">
+
+    <div class="heading">
+      <h2>{{offer.title}}</h2>
+      <p>{{offer.description}}</p>
+    </div>
+    <div class="heading">
+      <p *ngIf="offer.validity" margin-top>
+        {{offer.validity}}
+      </p>
+      <p *ngIf="offer.from && offer.to" margin-top>
+        <ion-icon name="stopwatch"></ion-icon>
+        <span>
+            {{offer.from}} - {{offer.to}}
+          </span>
+      </p>
+    </div>
+
+    <br><br>
+
+    <div padding>
+      <button color="primary" ion-button block round>
+        Participate Now!
+      </button>
+    </div>
+
+  </section>
+
+</ion-content>

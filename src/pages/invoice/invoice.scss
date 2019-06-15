@@ -1,0 +1,27 @@
+page-invoice {
+  font-style: normal;
+  h2,p{
+    color: #767c7a;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  .tabs-md-dark .tab-button[aria-selected="true"],
+  .tabs-wp-dark .tab-button[aria-selected="true"],
+  .tabs-ios-dark .tab-button[aria-selected="true"],
+  .segment-ios .segment-button.segment-activated,
+  .segment-wp .segment-button.segment-activated,
+  .segment-md .segment-button.segment-activated {
+    color: $secondary-color;
+    border-bottom: 3px solid $gradient-bg;
+    transition: all .3s linear;
+    background-color: #ffffff;
+  }
+
+  .header{
+    font-size: 22px;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
+
+}

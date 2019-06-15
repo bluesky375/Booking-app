@@ -1,0 +1,192 @@
+<ion-header no-border>
+  <ion-navbar color="primary">
+    <ion-title>Invoices</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+
+  <empty-view *ngIf="isErrorViewVisible" icon="alert" text="Bad internet connection"></empty-view>
+
+  <empty-view *ngIf="isEmptyViewVisible" icon="bookmark" text="No completed service"></empty-view>
+
+  <ion-refresher (ionRefresh)="onReload($event)">
+
+    <ion-refresher-content pullingText="Pull to Refresh" refreshingText="Refreshing..."></ion-refresher-content>
+
+  </ion-refresher>
+
+  <div>
+    <ion-segment [(ngModel)]="option">
+      <ion-segment-button value="unpaid">
+        UnPaid
+      </ion-segment-button>
+      <ion-segment-button value="paid">
+        Paid
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+
+  <section [ngSwitch]="option">
+    <div class="content"  *ngSwitchCase="'unpaid'">
+      <div *ngIf="unpaid.length > 0">
+        <div *ngFor="let booked of unpaid">
+          <section class="content" style="margin-top: 20px;">
+            <div class="heading">
+
+              <div style="display:flex;width:100%">
+
+                <p class="bold header" style="width:80%">{{booked.service?.title}}</p>
+
+              </div>
+
+              <div style="display:flex;width:100%">
+
+                <p *ngIf="booked?.service?.gh_price" margin-top style="width:30%">
+                  <ion-icon name="pricetag"></ion-icon>
+                  <span>
+                      GHC{{ booked?.service?.gh_price * booked?.quantity}} <br/>
+                         <span *ngIf="booked?.quantity === 1">(1 person)</span>
+                         <span *ngIf="booked?.quantity > 1">({{booked?.quantity}} people)</span>
+                    </span>
+                </p>
+
+                <p *ngIf="booked?.full_date" margin-top text-end style="width:70%;text-align:right">
+                  <ion-icon name="calendar"></ion-icon>
+                  <span>{{ booked?.full_date }}</span>
+                </p>
+
+              </div>
+
+              <div  style="display:flex;width:100%">
+                <p *ngIf="booked?.service?.duration" margin-top style="width:30%">
+                  <ion-icon name="stopwatch"></ion-icon>
+                  <span *ngIf="booked?.service?.duration === 1 && booked?.service?.durationType === 'hours'">1 hour</span>
+                  <span *ngIf="booked?.service?.duration !== 1 && booked?.service?.durationType">{{booked?.service?.duration}} {{booked?.service?.durationType}}</span>
+                  <span *ngIf="booked?.service?.duration !== 1 && !booked?.service?.durationType">{{booked?.service?.duration}} minutes</span>
+                </p>
+                <p *ngIf="booked?.time" margin-top text-end style="width:70%;text-align:right">
+                  <ion-icon name="time"></ion-icon>
+                  <span>{{ booked?.time }}</span>
+                </p>
+              </div>
+
+              <div (click)="openPage('ShopPage', { category: booked.category,provider:booked.provider_ })"  *ngIf="booked?.provider_"  style="display:flex;width:100%">
+                <p margin-top style="width:50%">
+                  <ion-icon name="user"></ion-icon>
+                  <span>{{booked?.provider_?.name }}</span>
+                </p>
+                <p *ngIf="booked?.provider_?.description"  margin-top text-end style="width:50%;text-align:right">
+                  <ion-icon color="dark" name="pin"></ion-icon>
+                  <span>
+                      {{ booked?.provider_?.description }}
+                  </span>
+                </p>
+              </div>
+
+              <div *ngIf="!booked?.client_paid"  padding>
+                <button color="secondary" ion-button round block (click)="pay(booked,$index)">PAID</button>
+              </div>
+
+              <p class="bold" text-center padding *ngIf="!booked?.professional_paid && booked?.client_paid">
+                Paid: <em style="color:#f53d3d">Awaiting service provider's approval</em>
+              </p>
+
+            </div>
+          </section>
+        </div>
+      </div>
+      <ion-list *ngIf="unpaid.length === 0 && loaded">
+        <ion-item>
+          <p text-center>You have no unpaid invoices</p>
+        </ion-item>
+      </ion-list>
+    </div>
+    <div class="content" *ngSwitchCase="'paid'">
+      <div *ngIf="paid.length > 0">
+        <div *ngFor="let booked of paid">
+          <section class="content" style="margin-top: 20px;">
+            <div class="heading">
+
+              <div style="display:flex;width:100%">
+
+                <p class="bold header" style="width:80%">{{booked.service?.title}}</p>
+
+              </div>
+
+              <div style="display:flex;width:100%">
+
+                <p *ngIf="booked?.service?.gh_price" margin-top style="width:30%">
+                  <ion-icon name="pricetag"></ion-icon>
+                  <span>
+                    GHC{{ booked?.service?.gh_price * booked?.quantity}} <br/>
+                       <span *ngIf="booked?.quantity === 1">(1 person)</span>
+                       <span *ngIf="booked?.quantity > 1">({{booked?.quantity}} people)</span>
+                  </span>
+                </p>
+
+                <p *ngIf="booked?.full_date" margin-top text-end style="width:70%;text-align:right">
+                  <ion-icon name="calendar"></ion-icon>
+                  <span>{{ booked?.full_date }}</span>
+                </p>
+
+              </div>
+
+              <div  style="display:flex;width:100%">
+                <p *ngIf="booked?.service?.duration" margin-top style="width:30%">
+                  <ion-icon name="stopwatch"></ion-icon>
+                  <span *ngIf="booked?.service?.duration === 1 && booked?.service?.durationType === 'hours'">1 hour</span>
+                  <span *ngIf="booked?.service?.duration !== 1 && booked?.service?.durationType">{{booked?.service?.duration}} {{booked?.service?.durationType}}</span>
+                  <span *ngIf="booked?.service?.duration !== 1 && !booked?.service?.durationType">{{booked?.service?.duration}} minutes</span>
+                </p>
+                <p *ngIf="booked?.time" margin-top text-end style="width:70%;text-align:right">
+                  <ion-icon name="time"></ion-icon>
+                  <span>{{ booked?.time }}</span>
+                </p>
+              </div>
+
+              <div (click)="openPage('ShopPage', { category: booked.category,provider:booked.provider_ })"  *ngIf="booked?.provider_"  style="display:flex;width:100%">
+                <p margin-top style="width:50%">
+                  <ion-icon name="user"></ion-icon>
+                  <span>{{booked?.provider_?.name }}</span>
+                </p>
+                <p *ngIf="booked?.provider_?.description"  margin-top text-end style="width:50%;text-align:right">
+                  <ion-icon color="dark" name="pin"></ion-icon>
+                  <span>
+                      {{ booked?.provider_?.description }}
+                  </span>
+                </p>
+              </div>
+
+              <div *ngIf="!booked?.reviewed" padding>
+                <button color="secondary" ion-button round block (click)="openPage('AddReviewPage', { providerId: booked.provider_._id, bookedId: booked._id ,type: 'add',callback:myCallbackFunction})">Review Service</button>
+              </div>
+
+              <div *ngIf="booked?.reviewed">
+                <div margin-bottom padding class="radius light-bg border">
+                  <ion-item *ngIf="booked?.rating" no-padding color="light">
+                    <star-rating *ngIf="booked?.rating" [starType]="'svg'" [size]="'small'" [readOnly]="true" [showHalfStars]="false" [rating]="booked?.rating"></star-rating>
+                    <span item-end (click)="openPage('AddReviewPage', { providerId: booked.provider_._id, bookedId: booked._id ,type: 'edit',review:{rating:booked.rating,comment:booked.comment},callback:myCallbackFunction})">
+                      edit
+                    </span>
+                  </ion-item>
+                  <ion-row>
+                    <ion-col *ngIf="booked.comment !== ''" no-padding col-12>
+                      <p class="text-medium bold no-margin" ion-text color="dark">{{ booked?.comment }}</p>
+                    </ion-col>
+                  </ion-row>
+                </div>
+              </div>
+
+
+            </div>
+          </section>
+        </div>
+      </div>
+      <ion-list *ngIf="paid.length === 0 && loaded">
+        <ion-item>
+          <p text-center>You have no paid invoices</p>
+        </ion-item>
+      </ion-list>
+    </div>
+  </section>
+</ion-content>

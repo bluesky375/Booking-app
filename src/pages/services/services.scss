@@ -1,0 +1,111 @@
+page-services {
+  font-style: normal;
+
+  .card-img {
+    height: 200px;
+    position: relative;
+
+    img-loader {
+      background-size: cover !important;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: -9999;
+
+      &:after {
+        content: '';
+        position: absolute;
+        width: inherit;
+        height: inherit;
+        top: 0;
+        left: 0;
+        background: rgba(0, 0, 0, 0.5);
+      }
+    }
+  }
+
+  ion-row{
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+
+  .card{
+    border-radius: 5px !important;
+    //border: .2px solid #d8d8d8;
+  }
+  .card-category {
+
+    width: 110px;
+    margin: 0 !important;
+    //box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+
+    .card-image {
+      height: 80px;
+
+      img-loader {
+        background-size: cover !important;
+      }
+    }
+    .card-content {
+      padding: 4px;
+    }
+  }
+
+  .offers {
+
+    .scroll-content {
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+
+    p{
+      width: 190px;
+      text-align: center !important;
+      font-size: 1.7em !important;
+      font-weight: 200 !important;
+      margin-top: 5px !important;
+      color: #2d2d2d;
+    }
+    .card {
+      border-radius: 5px !important;
+      //box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+      width: 200px;
+      margin: 0 auto;
+      img{
+        height: 200px;
+      }
+
+      .image-container {
+        position: relative;
+
+        .content {
+          background: transparent;
+          position: absolute;
+          padding: 6px;
+          width: 100%;
+          bottom: 0;
+          z-index: 1;
+        }
+
+        .triangle {
+          position: absolute;
+          bottom: 0;
+          width: 0;
+          height: 0;
+          border-left: 145px solid transparent;
+          border-bottom: 60px solid color($colors, light);
+        }
+      }
+
+      .circle-btn {
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+      }
+    }
+  }
+}

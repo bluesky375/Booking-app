@@ -1,0 +1,101 @@
+<ion-header no-border>
+  <ion-navbar color="primary">
+    <ion-title>Service Detail</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <section class="content">
+
+    <div class="heading">
+      <h2>{{data?.service?.title}}</h2>
+      <p>{{data?.service?.description}}</p>
+    </div>
+
+  </section>
+
+  <hr>
+
+  <section class="content">
+
+    <div class="heading">
+      <div style="display:flex;width:100%">
+        <p *ngIf="data?.service?.gh_price" margin-top style="width:30%">
+          <ion-icon name="pricetag"></ion-icon>
+          <span>
+            GHC{{ data?.service?.gh_price * data?.quantity}} <br/>
+               <span *ngIf="data?.quantity === 1">(1 person)</span>
+               <span *ngIf="data?.quantity > 1">({{data?.quantity}} people)</span>
+          </span>
+        </p>
+
+        <p *ngIf="data?.full_date" margin-top text-end style="width:70%;text-align:right">
+          <ion-icon name="calendar"></ion-icon>
+          <span>
+            {{ data?.full_date }}
+        </span>
+        </p>
+      </div>
+      <div  style="display:flex;width:100%">
+        <p *ngIf="data?.service?.duration" margin-top style="width:30%">
+          <ion-icon name="stopwatch"></ion-icon>
+          <span *ngIf="data?.service?.duration === 1 && data?.service?.durationType === 'hours'">1 hour</span>
+          <span *ngIf="data?.service?.duration !== 1 && data?.service?.durationType">{{data?.service?.duration}} {{data?.service?.durationType}}</span>
+          <span *ngIf="data?.service?.duration !== 1 && !data?.service?.durationType">{{data?.service?.duration}} minutes</span>
+        </p>
+        <p *ngIf="data?.time" margin-top text-end style="width:70%;text-align:right">
+          <ion-icon name="time"></ion-icon>
+          <span>
+            {{ data?.time }}
+        </span>
+        </p>
+      </div>
+
+    </div>
+
+  </section>
+
+  <hr *ngIf="data?.user">
+
+  <section *ngIf="data?.user" class="content">
+
+    <div class="heading">
+      <p *ngIf="data?.user?.phone && data.status === true" [hidden]="data.client_paid && data.professional_paid" (click)="makeCall(data.user.phone)"  margin-top float-end>
+        <ion-icon color="dark" name="call"></ion-icon>
+        <span class="text-small bold" ion-text color="dark">
+            CALL
+        </span>
+      </p>
+      <h2>{{data?.user?.username }}</h2>
+    </div>
+
+  </section>
+
+  <div padding class="book-it">
+    <ion-grid *ngIf="data.status === false">
+      <ion-row>
+        <ion-col col-6>
+          <button class="outline" ion-button round block (click)="confirm(data,false,'reject')">REJECT</button>
+        </ion-col>
+        <ion-col col-6>
+          <button color="secondary" ion-button round block (click)="confirm(data,true,'accept')">ACCEPT</button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <div *ngIf="data.status === true">
+      <div *ngIf="!data?.professional_completed" padding>
+        <button  color="secondary" ion-button round block (click)="completed(data,$index)">COMPLETED</button>
+      </div>
+      <ion-grid *ngIf="!data?.professional_paid && data?.professional_completed && data?.client_completed"  padding>
+        <button color="secondary" ion-button round block (click)="pay(data,$index)">PAID</button>
+      </ion-grid>
+      <p class="bold" text-center padding *ngIf="(data?.professional_completed && !data?.client_completed)
+                  || (data?.professional_paid && !data?.client_paid)">
+        <em style="color:#f53d3d;text-align: center">Awaiting client's approval</em>
+      </p>
+
+    </div>
+  </div>
+
+</ion-content>

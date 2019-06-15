@@ -1,0 +1,100 @@
+page-professionals-home {
+
+  font-style: normal;
+  h2,p{
+    color: #767c7a;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  .calendar-container{
+    padding: 10px;
+    color: #ffffff;
+
+    [col-1] {
+      -webkit-box-flex: 0;
+      -webkit-flex: 0 0 8.33333%;
+      -ms-flex: 0 0 8.33333%;
+      flex: 0 0 14.285714285714286%;
+      width: 14.285714285714286%;
+      max-width: 14.285714285714286%;
+    }
+    .col {
+      text-align: center;
+      position: relative;
+      padding: 5px;
+    }
+    .last-month, .next-month {
+      color: #999999;
+      font-size: 90%;
+    }
+    .currentDate, .otherDate,.selected-date {
+      padding: 5px;
+    }
+    .currentDate,.selected-date{
+      position: absolute;
+      padding-left: 10px;
+      padding-right: 10px;
+      border-radius: 40px;
+      left: 8px;
+      top: 0;
+    }
+    .currentDate {
+      background-color: #000000;
+      color: #f5a623;
+      font-weight: bold;
+    }
+    .selected-date {
+      background-color: #2d2d2d;
+    }
+    .calendar-header {
+
+    }
+    .event-bullet {
+      margin: 2px auto;
+      height: 5px;
+      width: 5px;
+      background-color: green;
+      border-radius: 30px;
+    }
+    .event-bullet.current-day{
+      position: absolute;
+      left: 19px;
+    }
+
+    .unselected-date {
+      border: none;
+    }
+    .calendar-body {
+      .grid {
+        padding: 0;
+      }
+      .col:last-child {
+        border-right: none;
+      }
+      .calendar-weekday, .calendar-date {
+        text-align: center;
+        margin: 0;
+      }
+      .calendar-weekday {
+
+      }
+      .calendar-date {
+
+      }
+    }
+
+  }
+
+  .header{
+    font-size: 22px;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
+
+  .outline{
+    background-color: transparent;
+    color: color($colors, secondary, base);
+    border: 1px solid color($colors, secondary, base);
+  }
+}

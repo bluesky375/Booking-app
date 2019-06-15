@@ -1,0 +1,84 @@
+<ion-header no-border>
+  <ion-navbar color="primary">
+    <ion-title>Settings</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content #container>
+  <div text-center padding>
+        <div class="img-container">
+          <ion-icon color="light" class="edit" (click)="onUpload()">Edit</ion-icon>
+          <img-loader [src]="avatar?.url" useImg></img-loader>
+        </div>
+        <h3>Hi, {{username}}</h3>
+  </div>
+
+  <hr style="border: 3px solid #dddddd">
+
+  <button (click)="EditInfo();" ion-item>
+    {{username}}
+    <ion-icon item-start color="primary" name="create"></ion-icon>
+  </button>
+
+  <button (click)="EditContact();" ion-item>
+    {{email}}
+    <ion-icon item-start color="primary" name="create"></ion-icon>
+  </button>
+
+  <button (click)="EditContact();" ion-item>
+    {{phone}}
+    <ion-icon item-start color="primary" name="create"></ion-icon>
+  </button>
+
+  <button icon-end (click)="EditPassword();" ion-item>
+    Password
+    <ion-icon item-start color="primary" name="create"></ion-icon>
+  </button>
+
+  <button ion-item icon-end (click)="LogOut()">
+      Logout
+      <ion-icon item-start color="primary" name="log-out"></ion-icon>
+  </button>
+
+<!--<ion-list>-->
+    <!--<ion-list-header>-->
+       <!--Name-->
+      <!--<button (click)="EditInfo();"  ion-button clear item-right>-->
+        <!--<ion-icon name="create"></ion-icon>-->
+      <!--</button>-->
+    <!--</ion-list-header>-->
+    <!--<ion-item>-->
+      <!--<ion-label stacked>Username</ion-label>-->
+      <!--<ion-input disabled type="text"  [value]="username" ></ion-input>-->
+    <!--</ion-item>-->
+  <!--</ion-list>-->
+  <!--<ion-list>-->
+    <!--<ion-list-header>-->
+      <!--Contact-->
+      <!--<button ion-button (click)="EditContact();" clear item-right>-->
+        <!--<ion-icon name="create"></ion-icon>-->
+      <!--</button>-->
+    <!--</ion-list-header>-->
+    <!--<ion-item>-->
+      <!--<ion-label stacked>Email</ion-label>-->
+      <!--<ion-input disabled type="text" [value]="email" ></ion-input>-->
+    <!--</ion-item>-->
+    <!--<ion-item>-->
+      <!--<ion-label stacked>Phone Number</ion-label>-->
+      <!--<ion-input disabled type="text" [value]="phone" ></ion-input>-->
+    <!--</ion-item>-->
+  <!--</ion-list>-->
+  <!--<ion-list>-->
+    <!--<ion-list-header>-->
+      <!--Edit Password-->
+      <!--<button (click)="EditPassword();" ion-button clear item-right>-->
+        <!--<ion-icon name="create"></ion-icon>-->
+      <!--</button>-->
+    <!--</ion-list-header>-->
+  <!--</ion-list>-->
+  <!--<ion-list>-->
+    <!--<button ion-item icon-start (click)="LogOut()">-->
+      <!--<ion-icon name="log-out"></ion-icon>-->
+      <!--Logout-->
+    <!--</button>-->
+  <!--</ion-list>-->
+</ion-content>

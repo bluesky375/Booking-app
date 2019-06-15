@@ -1,0 +1,49 @@
+<ion-slides pager>
+  <ion-slide id="slide5" class="slide-w">
+    <div class="content">
+      <h3>Hello, {{profile.username}}!</h3>
+      <p *ngIf="profile.phone === '0000000000' && profile.email !== ''">ENTER YOUR PHONE NUMBER</p>
+      <p *ngIf="profile.email === '' && profile.phone === '0000000000'">ENTER YOUR EMAIL AND PHONE NUMBER</p>
+      <div class="order-modal">
+        <ion-list>
+          <ion-item *ngIf="profile.email === ''">
+            <ion-input type="email" name="email" placeholder="Email" [(ngModel)]="email"></ion-input>
+          </ion-item>
+          <ion-item *ngIf="profile.phone === '0000000000'" class="n-select">
+            <ion-select [(ngModel)]="code">
+              <ion-option *ngFor="let code of codes" [value]="code.code">{{code.name}}</ion-option>
+            </ion-select>
+          </ion-item>
+          <ion-item *ngIf="profile.phone === '0000000000'">
+            <ion-label>{{code}}</ion-label>
+            <ion-input type="number" name="number" [(ngModel)]="number"></ion-input>
+          </ion-item>
+          <ion-item class="button-cl">
+            <button ion-button color="light" class="navBtn" (click)="Submit()" block round>SUBMIT</button>
+          </ion-item>
+        </ion-list>
+      </div>
+    </div>
+  </ion-slide>
+  <ion-slide id="slide4" class="slide-p">
+    <div class="content">
+      <h3>ENTER VERIFICATION CODE</h3>
+      <p class="change"> <span *ngIf="!passed30">1:</span>{{timer}}</p>
+      <div class="order-modal">
+        <ion-list>
+          <ion-item>
+            <ion-input type="text" name="code" placeholder="Code" [(ngModel)]="Vcode"></ion-input>
+          </ion-item>
+          <ion-item class="button-cl">
+            <button ion-button color="light" class="navBtn" (click)="SubmitCode()" block round>VERIFY</button>
+          </ion-item>
+          <ion-item class="button-cl">
+            <p class="change" (click)="SwitchNumber();">CHANGE NUMBER</p>
+          </ion-item>
+        </ion-list>
+      </div>
+    </div>
+  </ion-slide>
+
+
+</ion-slides>

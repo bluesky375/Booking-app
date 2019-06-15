@@ -1,0 +1,73 @@
+<ion-header no-border>
+  <ion-toolbar  color="primary" no-border style="display: flex">
+    <button clear ion-button item-start icon-only color="dark" class="back-button_" (click)="goBack()">
+      <ion-icon name="arrow-back"></ion-icon>
+    </button>
+    <form (submit)="SearchResult()">
+      <ion-searchbar placeholder="{{placeholder}}" #input name="search" (ionInput)="getItems($event)" [(ngModel)]="result"></ion-searchbar>
+      <button type="submit"  style="display:none"></button>
+    </form>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div [hidden]="loaded" class="spinner-container">
+    <ion-spinner></ion-spinner>
+  </div>
+  <div *ngIf="results.length > 0">
+    <div *ngIf="type === 'service'">
+      <div *ngIf="s_type === 'service'">
+        <div class="card-img" *ngFor="let result of results" (click)="Service(result)">
+          <img-loader [src]="result?.url" (load)="onImageLoad($event)"></img-loader>
+          <div>
+            <h5 class="bold" ion-text color="light">{{ result?.name }}</h5>
+            <span class="bold" ion-text color="light">
+          {{ result?.description }}
+        </span>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="s_type === 'categories'">
+        <div class="card-img" *ngFor="let result of results" (click)="openPage('ServicePage', { service: result,category: result.category })">
+          <img-loader [src]="result?.url" (load)="onImageLoad($event)"></img-loader>
+          <div>
+            <h5 class="bold" ion-text color="light">{{ result?.title }}</h5>
+            <span class="bold" ion-text color="light">
+          {{ result?.description }}
+        </span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div *ngIf="type === 'provider'">
+      <ion-card no-margin margin-bottom color="light" *ngFor="let result of results" (click)="openPage('ShopPage', { provider:result })">
+        <div class="card-img">
+          <img-loader [src]="result?.url" (load)="onImageLoad($event)"></img-loader>
+        </div>
+        <ion-card-content>
+          <ion-row no-padding>
+            <ion-col col-8>
+              <p class="bold">{{ result?.name }}</p>
+              <span *ngIf="result?.reviews.length > 0" style="display: flex">
+              <star-rating [starType]="'svg'" [size]="'medium'" [readOnly]="true" [showHalfStars]="false" [rating]="result?.rating"></star-rating>
+              <span class="dark">({{result?.reviews.length}})</span>
+           </span>
+              <span class="bold text-small" ion-text color="accent">{{ result?.title }}</span>
+            </ion-col>
+            <ion-col col-4 text-end align-self-end>
+              <span class="bold text-small" ion-text color="primary">
+                <ion-icon color="primary" name="pin"></ion-icon>
+                {{ result?.description }}
+              </span>
+            </ion-col>
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+  <div [hidden]="!b_loaded" *ngIf="results.length === 0" class="no-product">
+    <h1>No result found for</h1>
+    <p>"{{result}}"</p>
+  </div>
+</ion-content>

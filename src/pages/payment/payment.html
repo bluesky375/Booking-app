@@ -1,0 +1,62 @@
+<ion-header no-border>
+  <ion-navbar color="primary">
+    <ion-title>Arrears</ion-title>
+    <ion-buttons end>
+      <button ion-button color="light" (click)="navigateTo('InvoicePage')" icon-only>
+        <ion-icon name="list-box"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+
+  <empty-view *ngIf="isErrorViewVisible" icon="alert" text="Bad internet connection"></empty-view>
+
+  <empty-view *ngIf="isEmptyViewVisible" icon="bookmark" text="You have no pending arrears at the moment"></empty-view>
+
+  <ion-refresher (ionRefresh)="onReload($event)">
+
+    <ion-refresher-content pullingText="Pull to Refresh" refreshingText="Refreshing..."></ion-refresher-content>
+
+  </ion-refresher>
+
+  <div [hidden]="loaded" class="spinner-container">
+    <ion-spinner></ion-spinner>
+  </div>
+
+  <ion-list [hidden]="!loaded" *ngIf="arrears.length > 0">
+
+    <ion-item *ngFor="let a of arrears">
+         <div (click)="navigateTo('ServiceDetailPage', {booked: a})">
+           <h2>{{a?.service?.title}}</h2>
+           <p *ngIf="a?.full_date && a?.time" margin-top>
+             <ion-icon name="calendar"></ion-icon>
+             <span>{{ a?.full_date }} @{{a?.time}}</span>
+           </p>
+         </div>
+        <div item-end style="text-align: right">
+          <p>{{a.owe}}</p>
+          <button style="padding: 15px 25px;margin-right:-5px;" ion-button round (click)="Submit(a,$index)" class="outline">Pay</button>
+        </div>
+    </ion-item>
+
+  </ion-list>
+
+
+</ion-content>
+<ion-footer *ngIf="!isErrorViewVisible && !isEmptyViewVisible && loaded" padding>
+  <div padding style="display:flex;width:100%">
+
+    <p  margin-top style="width:30%">
+      Total:
+    </p>
+
+    <p  margin-top text-end style="width:70%;text-align:right">
+      GHC{{total}}
+    </p>
+
+  </div>
+  <button color="primary" ion-button block round (click)="SubmitAll()">
+      Pay all
+  </button>
+</ion-footer>

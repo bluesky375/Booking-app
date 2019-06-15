@@ -1,0 +1,117 @@
+<ion-header no-border>
+  <ion-navbar color="primary">
+    <ion-title>Service Detail</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <section class="content">
+
+    <div class="heading">
+      <h2>{{data?.service?.title}}</h2>
+      <p>{{data?.service?.description}}</p>
+    </div>
+
+  </section>
+
+  <hr>
+
+  <section class="content">
+
+    <div class="heading">
+      <div style="display:flex;width:100%">
+        <p *ngIf="data?.service?.gh_price" margin-top style="width:30%">
+          <ion-icon name="pricetag"></ion-icon>
+          <span>
+            GHC{{ data?.service?.gh_price * data?.quantity}} <br/>
+               <span *ngIf="data?.quantity === 1">(1 person)</span>
+               <span *ngIf="data?.quantity > 1">({{data?.quantity}} people)</span>
+          </span>
+        </p>
+
+        <p *ngIf="data?.fulldate" margin-top text-end style="width:70%;text-align:right">
+          <ion-icon name="calendar"></ion-icon>
+          <span>
+            {{ data?.fulldate }}
+        </span>
+        </p>
+      </div>
+      <div  style="display:flex;width:100%">
+        <p *ngIf="data?.service?.duration" margin-top style="width:30%">
+          <ion-icon name="stopwatch"></ion-icon>
+          <span *ngIf="data?.service?.duration === 1 && data?.service?.durationType === 'hours'">1 hour</span>
+          <span *ngIf="data?.service?.duration !== 1 && data?.service?.durationType">{{data?.service?.duration}} {{data?.service?.durationType}}</span>
+          <span *ngIf="data?.service?.duration !== 1 && !data?.service?.durationType">{{data?.service?.duration}} minutes</span>
+        </p>
+        <p *ngIf="data?.time" margin-top text-end style="width:70%;text-align:right">
+          <ion-icon name="time"></ion-icon>
+          <span>
+            {{ data?.time }}
+        </span>
+        </p>
+      </div>
+
+    </div>
+
+  </section>
+
+  <hr *ngIf="data?.user">
+
+  <hr *ngIf="data?.provider_">
+
+  <section *ngIf="data?.provider_" class="content">
+
+    <div (click)="openPage('ShopPage', { category: data.category,provider:data.provider_ })"
+         [hidden]="data?.open && (!data?.professional_paid && !data?.client_paid && !data?.professional_completed && !data?.client_completed)"
+         class="heading">
+      <p *ngIf="data?.provider_?.description" margin-top float-end>
+        <ion-icon color="dark" name="pin"></ion-icon>
+        <span class="text-small bold" ion-text color="dark">
+            {{ data?.provider_?.description }}
+        </span>
+      </p>
+      <h2>{{data?.provider_?.name }}</h2>
+      <p>{{data?.provider_?.title}}</p>
+    </div>
+
+  </section>
+
+  <div *ngIf="!data?.reviewed && data?.professional_paid && data?.client_paid" padding>
+    <button color="secondary" ion-button round block (click)="openPage('AddReviewPage', { providerId: booked.provider_._id, bookedId: booked._id ,type: 'add',callback:myCallbackFunction})">Review Service</button>
+  </div>
+
+  <div *ngIf="data?.reviewed && data?.professional_paid && data?.client_paid">
+    <div margin-bottom padding class="radius light-bg border">
+      <ion-item *ngIf="data?.rating" no-padding color="light">
+        <star-rating *ngIf="data?.rating" [starType]="'svg'" [size]="'small'" [readOnly]="true" [showHalfStars]="false" [rating]="data?.rating"></star-rating>
+        <span item-end (click)="openPage('AddReviewPage', { providerId: data.provider_._id, dataId: data._id ,type: 'edit',review:{rating:data.rating,comment:data.comment},callback:myCallbackFunction})">
+                      edit
+                    </span>
+      </ion-item>
+      <ion-row>
+        <ion-col *ngIf="data.comment !== ''" no-padding col-12>
+          <p class="text-medium bold no-margin" ion-text color="dark">{{ data?.comment }}</p>
+        </ion-col>
+      </ion-row>
+    </div>
+  </div>
+
+
+  <div padding class="book-it">
+    <div *ngIf="data.status === true">
+      <div *ngIf="!data?.client_completed" padding>
+        <button  color="secondary" ion-button round block (click)="completed(data,$index)">COMPLETED</button>
+      </div>
+      <ion-grid *ngIf="!data?.client_paid && data?.professional_completed && data?.client_completed"  padding>
+        <button color="secondary" ion-button round block (click)="pay(data,$index)">PAID</button>
+      </ion-grid>
+      <p class="bold" text-center *ngIf="(!data?.professional_completed && data?.client_completed)
+                  || (!data?.professional_paid && data?.client_paid)">
+        <em style="color:#f53d3d;">Awaiting service provider's approval</em>
+      </p>
+
+    </div>
+  </div>
+
+</ion-content>

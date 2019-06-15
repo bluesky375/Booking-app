@@ -1,0 +1,85 @@
+<ion-header no-border>
+  <ion-navbar color="primary">
+    <ion-title>Confirm</ion-title>
+    <ion-buttons end>
+      <button ion-button="" clear (click)="dismiss()" icon-only="">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+
+  </ion-navbar>
+</ion-header>
+<ion-content>
+
+  <section class="content">
+
+    <div class="heading">
+      <h2>{{booked?.service?.title}}</h2>
+      <p>{{booked?.service?.description}}</p>
+    </div>
+
+  </section>
+
+  <hr>
+
+  <section class="content">
+
+    <div class="heading">
+      <div style="display:flex;width:100%">
+        <p *ngIf="booked?.service?.gh_price" margin-top style="width:30%">
+          <ion-icon name="pricetag"></ion-icon>
+          <span>
+            GHC{{ booked?.service?.gh_price * booked?.quantity}} <br/>
+               <span *ngIf="booked?.quantity === 1">(1 person)</span>
+               <span *ngIf="booked?.quantity > 1">({{booked?.quantity}} people)</span>
+          </span>
+        </p>
+
+        <p *ngIf="booked?.fulldate" margin-top text-end style="width:70%;text-align:right">
+          <ion-icon name="calendar"></ion-icon>
+          <span>
+            {{ booked?.fulldate }}
+        </span>
+        </p>
+      </div>
+      <div  style="display:flex;width:100%">
+        <p *ngIf="booked?.service?.duration" margin-top style="width:30%">
+          <ion-icon name="stopwatch"></ion-icon>
+          <span *ngIf="booked?.service?.duration === 1 && booked?.service?.durationType === 'hours'">1 hour</span>
+          <span *ngIf="booked?.service?.duration !== 1 && booked?.service?.durationType">{{booked?.service?.duration}} {{booked?.service?.durationType}}</span>
+          <span *ngIf="booked?.service?.duration !== 1 && !booked?.service?.durationType">{{booked?.service?.duration}} minutes</span>
+        </p>
+        <p *ngIf="booked?.time" margin-top text-end style="width:70%;text-align:right">
+          <ion-icon name="time"></ion-icon>
+          <span>
+            {{ booked?.time }}
+        </span>
+        </p>
+      </div>
+
+    </div>
+
+  </section>
+
+  <hr *ngIf="booked?.provider">
+
+  <section *ngIf="booked?.provider" class="content">
+
+    <div class="heading">
+      <p *ngIf="booked?.provider?.description" margin-top float-end>
+        <ion-icon color="dark" name="pin"></ion-icon>
+        <span class="text-small bold" ion-text color="dark">
+            {{ booked?.provider?.description }}
+        </span>
+      </p>
+      <h2>{{booked?.provider?.name }}</h2>
+      <p>{{booked?.provider?.title}}</p>
+    </div>
+
+  </section>
+
+  <div padding class="book-it">
+     <button color="secondary" ion-button block round (click)="Book()">BOOK</button>
+  </div>
+
+</ion-content>

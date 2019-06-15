@@ -1,0 +1,99 @@
+<ion-header no-border>
+  <ion-navbar color="primary">
+    <ion-title *ngIf="service.title">{{service.title}}</ion-title>
+    <ion-buttons end>
+      <button ion-button="" clear (click)="dismiss()" icon-only="">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+
+  <ion-refresher (ionRefresh)="onReload($event)">
+
+    <ion-refresher-content pullingText="Pull to Refresh" refreshingText="Refreshing..."></ion-refresher-content>
+
+  </ion-refresher>
+  <section class="header_">
+    <div *ngIf="category" class="card-img">
+      <img-loader [src]="service?.url" (load)="onImageLoad($event)"></img-loader>
+    </div>
+  </section>
+
+  <div>
+    <ion-segment [(ngModel)]="option">
+      <ion-segment-button value="details">
+        Service Details
+      </ion-segment-button>
+      <ion-segment-button value="shops">
+        Shops
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+
+
+  <section [ngSwitch]="option">
+    <div class="content"  *ngSwitchCase="'details'">
+      <div *ngIf="service.description"  class="heading">
+        <p>{{service.description}}</p>
+      </div>
+      <div class="heading">
+        <p *ngIf="service?.gh_price" margin-top>
+          <ion-icon name="pricetag"></ion-icon>
+          <span>
+            GHC{{service?.gh_price}}
+          </span>
+        </p>
+        <p *ngIf="service.duration"  margin-top>
+          <ion-icon name="stopwatch"></ion-icon>
+          <span *ngIf="service.duration === 1 && service.durationType === 'hours'">1 hour</span>
+          <span *ngIf="service.duration !== 1 && service.durationType">{{service.duration}} {{service.durationType}}</span>
+          <span *ngIf="service.duration !== 1 && !service.durationType">{{service.duration}} minutes</span>
+        </p>
+      </div>
+
+      <br><br>
+
+      <div padding>
+        <button (click)="openPage('CalendarPage', { service: service,category: category,provider:null })" color="primary" ion-button block round>
+          Book Appointment
+        </button>
+      </div>
+
+    </div>
+    <div class="shop" *ngSwitchCase="'shops'">
+
+      <empty-view *ngIf="isErrorViewVisible" icon="alert" text="Bad internet connection"></empty-view>
+
+      <empty-view *ngIf="isEmptyViewVisible" icon="bookmark" text="No shop exist at the moment"></empty-view>
+
+      <div *ngIf="providers.length">
+        <ion-card no-margin margin-bottom color="light" *ngFor="let provider of providers" (click)="openPage('ShopPage', { category: category,provider:provider })">
+          <div class="card-img">
+            <img-loader [src]="provider.url" (load)="onImageLoad($event)"></img-loader>
+          </div>
+          <ion-card-content>
+            <ion-row no-padding>
+              <ion-col col-8>
+                <p class="bold">{{ provider.name }}</p>
+                <span *ngIf="provider?.reviews.length > 0" style="display: flex">
+              <star-rating [starType]="'svg'" [size]="'medium'" [readOnly]="true" [showHalfStars]="false" [rating]="provider?.rating"></star-rating>
+              <span class="dark">({{provider?.reviews.length}})</span>
+           </span>
+                <span class="bold text-small" ion-text color="accent">{{ provider.title }}</span>
+              </ion-col>
+              <ion-col col-4 text-end align-self-end>
+              <span class="bold text-small" ion-text color="primary">
+                <ion-icon color="primary" name="pin"></ion-icon>
+                {{ provider.description }}
+              </span>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+      </div>
+    </div>
+  </section>
+
+</ion-content>

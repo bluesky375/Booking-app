@@ -1,0 +1,20 @@
+page-my-service-detail {
+  font-style: normal;
+  h2,p{
+    color: #767c7a;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  .header{
+    font-size: 22px;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
+
+  .outline{
+    background-color: transparent;
+    color: color($colors, secondary, base);
+    border: 1px solid color($colors, secondary, base);
+  }
+}

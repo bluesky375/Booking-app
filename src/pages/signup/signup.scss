@@ -1,0 +1,121 @@
+page-signup {
+  h3{
+    color: #ffffff;
+  }
+  .container{
+    background-color: color($colors, primary);
+  }
+  .item-md,.item-ios,.item-wp{
+    background-color: transparent !important;
+    color: rgb(250,250,250) !important;
+    border-color: transparent;
+    padding-left: 0 !important;
+    margin-bottom: 5%;
+  }
+  .popover-viewport .button-cl.item{
+    color: #7a7a7a !important;
+    padding-left: 0 !important;
+  }
+
+  .button-cl.item{
+    padding-left: 8px !important;
+    padding-right: 0 !important;
+  }
+
+  .list-ios > .item-block:first-child,
+  .list-ios > .item-block:last-child{
+    border: none !important;
+  }
+
+  .bottom-label.item-md.item-block .item-inner{
+    padding-right: 0 !important;
+    border: none !important;
+  }
+  .bottom-label.item-md.item-block .label-md{
+    margin: 0;
+    margin-top: 15px;
+  }
+  ion-slides{
+    font-style: normal;
+  }
+  .slide-zoom {
+    height: 100%;
+  }
+  h2,h3{
+    font-weight: 200;
+  }
+
+  h2{
+    margin-top: 40%;
+    font-size: 23px
+  }
+  h3{
+    margin-top: 8%;
+    font-size: 15px;
+  }
+  .n-icon{
+    font-size: 80px;
+    color: color($colors, light);
+    margin-top: 25%;
+  }
+  .n-icon1{
+    font-size: 60px;
+    border: 3px solid color($colors, light);
+    padding-left: 8px;
+    padding-right: 8px;
+    border-radius: 100%;
+  }
+
+  b {
+    font-weight: 500;
+  }
+
+  p {
+    padding: 0 40px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #ffffff;
+
+    b {
+      color: #000000;
+    }
+  }
+
+  #slide4 h3,#slide5 h3{
+    margin-top: 45%;
+  }
+
+  ion-select{
+    min-width: 100%;
+    background-color: transparent;
+    color: #ffffff;
+  }
+  .n-select.item-md,.n-select.item-ios,.n-select.item-wp{
+    color: #ffffff !important;
+  }
+  .change{
+    color: color($colors, light);
+    text-align: center;
+    font-weight: 800;
+  }
+
+  .item-input.input-has-focus .item-inner{
+    border-bottom: 1px solid #767c7a !important;
+    box-shadow: none !important;
+  }
+  .item-md.item-input.ng-valid.item-input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner, .item-md.item-input.ng-valid.input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner,
+  .item-ios.item-input.ng-valid.item-input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner, .item-ios.item-input.ng-valid.input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner,
+  .item-wp.item-input.ng-valid.item-input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner, .item-wp.item-input.ng-valid.input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner{
+    border-bottom: 1px solid #767c7a !important;
+    box-shadow: none !important;
+  }
+
+  .swiper-pagination-bullet {
+    background-color: #ffffff;
+  }
+  .swiper-pagination-bullet-active {
+    background: #ac0150;
+    background-color: rgb(172, 1, 80);
+    opacity: 1;
+  }
+}

@@ -1,0 +1,139 @@
+page-service {
+  .header_{
+    .card-img {
+      height: 200px;
+      position: relative;
+
+      img-loader {
+        background-size: cover !important;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: -9999;
+
+        &:after {
+          content: '';
+          position: absolute;
+          width: inherit;
+          height: inherit;
+          top: 0;
+          left: 0;
+          background: rgba(0, 0, 0, 0.5);
+        }
+      }
+    }
+  }
+  .item{
+    margin: 0;
+    padding: 0 !important;
+    padding-left: 5px !important;
+    .item-inner{
+      border-bottom-color: transparent !important;
+    }
+    p{
+      margin-top: 5px !important;
+    }
+  }
+  ion-thumbnail {
+    min-width: 30px !important;
+    min-height: 30px !important;
+    img {
+      width: 30px !important;
+      height: 30px !important;
+    }
+  }
+
+
+  .shop{
+    padding: 8px;
+    .card {
+      width: 100%;
+      .card-img {
+        height: 150px;
+        img-loader {
+          background-size: cover !important;
+        }
+      }
+      .card-content {
+        padding: 6px !important;
+      }
+    }
+
+    ion-note {
+      font-size: 12px;
+      align-self: flex-start;
+      margin-top: 14px;
+    }
+
+    ul {
+      margin: 0;
+      padding: 0;
+
+      &.rating li {
+        padding: 5px 0 !important;
+        background: none;
+        color: color($colors, primary, base);
+
+        ion-icon {
+          font-size: 16px;
+        }
+      }
+    }
+    .transparent-bg{
+      background-color: rgba(0,0,0,.6);
+      color:#ffffff;
+    }
+  }
+
+  .tabs-md-dark .tab-button[aria-selected="true"],
+  .tabs-wp-dark .tab-button[aria-selected="true"],
+  .tabs-ios-dark .tab-button[aria-selected="true"],
+  .segment-ios .segment-button.segment-activated,
+  .segment-wp .segment-button.segment-activated,
+  .segment-md .segment-button.segment-activated {
+    color: $secondary-color;
+    border-bottom: 3px solid $gradient-bg;
+    transition: all .3s linear;
+    background-color: #ffffff;
+  }
+  .p_button{
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  ion-avatar img {
+    border-radius: 0 !important;
+    overflow: hidden;
+    width: 50px;
+    background-color: transparent;
+    height: auto !important;
+  }
+  .item-md [item-end] {
+    margin: 0 0 0 0;
+  }
+  .item-md ion-avatar.avatar{
+    text-align: center;
+    margin: 8px 16px 8px -8px !important;
+    img{
+      display: block;
+      margin: 0 auto;
+      height: 30px !important;
+      width: auto !important;
+      border-radius: 0 !important;
+    }
+  }
+
+  .ins-icon{
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-bottom: 2px;
+    padding-top: 2px;
+  }
+  .ins-icon1{
+    padding-bottom: 10px;
+    margin-right: -10px;
+    padding-top: 10px;
+  }
+}

@@ -1,0 +1,21 @@
+page-edit-pro-contact {
+  h2,h3,p{
+    color: #767c7a;
+  }
+
+  .item{
+    padding: 0 !important;
+  }
+
+  .item-input.input-has-focus .item-inner{
+    border-bottom: 1px solid #767c7a !important;
+    box-shadow: none !important;
+  }
+
+  .item-md.item-input.ng-valid.item-input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner, .item-md.item-input.ng-valid.input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner,
+  .item-ios.item-input.ng-valid.item-input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner, .item-ios.item-input.ng-valid.input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner,
+  .item-wp.item-input.ng-valid.item-input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner, .item-wp.item-input.ng-valid.input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner{
+    border-bottom: 1px solid #767c7a !important;
+    box-shadow: none !important;
+  }
+}

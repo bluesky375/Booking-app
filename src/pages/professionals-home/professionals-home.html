@@ -1,0 +1,141 @@
+<ion-header no-border>
+  <ion-navbar color="primary">
+    <ion-title>Requests</ion-title>
+    <ion-buttons end>
+      <button ion-button color="light" (click)="navigateTo('InvoicePage')" icon-only>
+        <ion-icon name="list-box"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+
+  <empty-view *ngIf="isErrorViewVisible" icon="alert" text="Bad internet connection"></empty-view>
+
+  <ion-refresher (ionRefresh)="onReload($event)">
+
+    <ion-refresher-content pullingText="Pull to Refresh" refreshingText="Refreshing..."></ion-refresher-content>
+
+  </ion-refresher>
+
+  <div class="gradient-bg calendar-container">
+    <div class="calendar-header">
+      <ion-row class="calendar-month">
+        <ion-col col-2 (click)="goToLastMonth(null)"><ion-icon name="arrow-back"></ion-icon></ion-col>
+        <ion-col col-8>{{currentMonth}} {{currentYear}}</ion-col>
+        <ion-col col-2 (click)="goToNextMonth(null)"><ion-icon name="arrow-forward"></ion-icon></ion-col>
+      </ion-row>
+    </div>
+    <div class="calendar-body">
+      <ion-grid>
+        <ion-row class="calendar-weekday">
+          <ion-col>Su</ion-col>
+          <ion-col>Mo</ion-col>
+          <ion-col>Tu</ion-col>
+          <ion-col>We</ion-col>
+          <ion-col>Th</ion-col>
+          <ion-col>Fr</ion-col>
+          <ion-col>Sa</ion-col>
+        </ion-row>
+        <ion-row class="calendar-date">
+          <ion-col col-1 *ngFor="let lastDay of daysInLastMonth;" class="last-month" (click)="goToLastMonth(lastDay);dateSelected(lastDay)">
+            <span [ngClass]="{'selected-date': lastDay.selected}">{{lastDay.day}}</span>
+          </ion-col>
+          <ion-col col-1 *ngFor="let day of daysInThisMonth" (click)="selectDate(day);dateSelected(day)">
+            <span *ngIf="currentDate === day.day; else otherDate">
+              <span class="currentDate">{{day.day}}</span><br>
+              <div class="event-bullet current-day" *ngIf="day.event"></div>
+            </span>
+            <ng-template #otherDate class="otherDate">
+              <span [ngClass]="{'selected-date': day.selected}">{{day.day}}</span><br>
+              <div class="event-bullet" *ngIf="day.event"></div>
+            </ng-template>
+
+          </ion-col>
+          <ion-col col-1 *ngFor="let nextDay of daysInNextMonth" class="next-month" (click)="goToNextMonth(nextDay);dateSelected(nextDay)">
+            <span [ngClass]="{'selected-date': nextDay.selected}">{{nextDay.day}}</span>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </div>
+
+  <div [hidden]="loaded" class="spinner-container">
+    <ion-spinner></ion-spinner>
+  </div>
+
+  <div class="content"  [hidden]="!loaded">
+
+    <p (click)="viewAll()" text-end>View All</p>
+
+    <div *ngIf="results.length > 0">
+      <div *ngFor="let booked of results">
+         <section class="content" style="margin-top: 20px;">
+        <div class="heading">
+
+          <div style="display:flex;width:100%">
+
+            <p class="bold header" style="width:80%">{{booked.service?.title}}</p>
+
+          </div>
+
+          <div style="display:flex;width:100%">
+
+            <p *ngIf="booked?.service?.gh_price" margin-top style="width:30%">
+              <ion-icon name="pricetag"></ion-icon>
+              <span>
+                GHC{{ booked?.service?.gh_price * booked?.quantity}} <br/>
+                   <span *ngIf="booked?.quantity === 1">(1 person)</span>
+                   <span *ngIf="booked?.quantity > 1">({{booked?.quantity}} people)</span>
+              </span>
+            </p>
+
+            <p *ngIf="booked?.full_date" margin-top text-end style="width:70%;text-align:right">
+              <ion-icon name="calendar"></ion-icon>
+              <span>{{ booked?.full_date }}</span>
+            </p>
+
+          </div>
+
+          <div  style="display:flex;width:100%">
+            <p *ngIf="booked?.service?.duration" margin-top style="width:30%">
+              <ion-icon name="stopwatch"></ion-icon>
+              <span *ngIf="booked?.service?.duration === 1 && booked?.service?.durationType === 'hours'">1 hour</span>
+              <span *ngIf="booked?.service?.duration !== 1 && booked?.service?.durationType">{{booked?.service?.duration}} {{booked?.service?.durationType}}</span>
+              <span *ngIf="booked?.service?.duration !== 1 && !booked?.service?.durationType">{{booked?.service?.duration}} minutes</span>
+            </p>
+            <p *ngIf="booked?.time" margin-top text-end style="width:70%;text-align:right">
+              <ion-icon name="time"></ion-icon>
+              <span>{{ booked?.time }}</span>
+            </p>
+          </div>
+
+          <div  *ngIf="booked?.user"  style="display:flex;width:100%">
+            <p margin-top>
+              <ion-icon name="user"></ion-icon>
+              <span>{{booked?.user?.username }}</span>
+            </p>
+          </div>
+
+          <ion-grid>
+            <ion-row>
+              <ion-col col-6>
+                <button class="outline" ion-button round block (click)="confirm(booked,false,'reject',$index)">REJECT</button>
+              </ion-col>
+              <ion-col col-6>
+                <button color="secondary" ion-button round block (click)="confirm(booked,true,'accept',$index)">ACCEPT</button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+
+        </div>
+      </section>
+      </div>
+    </div>
+
+    <div *ngIf="results.length === 0" text-center>
+      <p>No service requests at the moment</p>
+    </div>
+  </div>
+
+</ion-content>

@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "471938106219",
+    "firebase_url": "https://spekup-44801.firebaseio.com",
+    "project_id": "spekup-44801",
+    "storage_bucket": "spekup-44801.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:471938106219:android:c8ce813dd2c34ecd",
+        "android_client_info": {
+          "package_name": "com.spekup.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "471938106219-lgocseam9oq7gof5gbhcjblfsdugug5q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.spekup.app",
+            "certificate_hash": "eacc8526f6e5868b7b3058bf35bb742e9fe60b07"
+          }
+        },
+        {
+          "client_id": "471938106219-ddlcu5s8pdpitnog8on7s6hf3gvf8guv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD7H_g5J0SEOTGR4J13edLJyXi4DcTFi0s"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "471938106219-ddlcu5s8pdpitnog8on7s6hf3gvf8guv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

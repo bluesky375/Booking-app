@@ -1,0 +1,109 @@
+<ion-header no-border>
+  <ion-navbar color="primary">
+    <ion-title *ngIf="category.name">{{category.name}}</ion-title>
+    <ion-buttons end>
+      <button ion-button="" clear (click)="dismiss()" icon-only="">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+
+  <div *ngIf="!isErrorViewVisible && !isEmptyViewVisible " class="card-img">
+    <img-loader [src]="category.url" (load)="onImageLoad($event)"></img-loader>
+  </div>
+
+  <empty-view *ngIf="isErrorViewVisible" icon="alert" text="Bad internet connection"></empty-view>
+
+  <empty-view *ngIf="isEmptyViewVisible" icon="bookmark" text="No information found"></empty-view>
+
+  <ion-refresher (ionRefresh)="onReload($event)">
+
+    <ion-refresher-content pullingText="Pull to Refresh" refreshingText="Refreshing..."></ion-refresher-content>
+
+  </ion-refresher>
+
+  <section class="content" *ngIf="services.length > 0">
+
+    <div class="heading">
+      <h2>Choose preferred service</h2>
+      <p>We have a pool of categories to browse from. Which do you prefer?</p>
+    </div>
+
+    <ion-scroll scrollX="true" direction="x" style="height: 140px">
+      <ion-row nowrap align-items-center margin-horizontal>
+        <ion-col col-auto float-left *ngFor="let service of services">
+          <ion-card class="card-category" color="light"
+                    (click)="openPage('ServicePage', { service: service,category: category })">
+            <div class="card-image">
+              <img-loader (load)="onImageLoad($event)"
+                          [src]="service.url">
+              </img-loader>
+            </div>
+            <ion-card-content class="gradient-bg" text-center text-nowrap>
+              <p class="text-small bold ellipsis">{{ service.title }}</p>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-scroll>
+
+  </section>
+
+  <section class="content" *ngIf="providers.length > 0">
+
+    <div class="heading">
+      <h2>Choose prefered vendor</h2>
+      <p>We curated our service providers to fit your search. Book an appointment with a service provider of your choosing</p>
+    </div>
+
+    <ion-scroll scrollX="true" direction="x" style="height: 140px">
+      <ion-row nowrap align-items-center margin-horizontal>
+        <ion-col col-auto float-left *ngFor="let provider of providers">
+          <ion-card class="card-category" color="light"
+                    (click)="openPage('ShopPage', {category: category ,provider:provider})">
+            <div class="card-image">
+              <img-loader (load)="onImageLoad($event)"
+                          [src]="provider.url">
+              </img-loader>
+            </div>
+            <ion-card-content class="gradient-bg" text-center text-nowrap>
+              <p class="text-small bold ellipsis">{{ provider.title }}</p>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-scroll>
+
+  </section>
+
+  <!--<section class="content" *ngIf="offers.length > 0">-->
+
+    <!--<div class="heading">-->
+      <!--<h2>Special Offers</h2>-->
+      <!--<p>Grab these special offers from your favourite shops</p>-->
+    <!--</div>-->
+
+    <!--<div class="offers">-->
+      <!--<ion-scroll scrollX="true" direction="x" style="height: 270px">-->
+        <!--<ion-row nowrap margin-horizontal>-->
+          <!--<ion-col col-auto float-left *ngFor="let offer of offers"-->
+                   <!--(click)="openPage('OfferPage', { offer: offer, category: category })">-->
+
+            <!--<ion-card color="light">-->
+
+              <!--<div class="image-container">-->
+                <!--<img-loader useImg (load)="onImageLoad($event)"-->
+                            <!--[src]="offer.url">-->
+                <!--</img-loader>-->
+              <!--</div>-->
+            <!--</ion-card>-->
+            <!--<p no-margin text-nowrap text-center class="text-medium ellipsis bold">{{ offer.title }}</p>-->
+          <!--</ion-col>-->
+        <!--</ion-row>-->
+      <!--</ion-scroll>-->
+    <!--</div>-->
+
+  <!--</section>-->
+</ion-content>

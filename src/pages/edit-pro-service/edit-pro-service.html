@@ -1,0 +1,48 @@
+<ion-header no-border>
+  <ion-navbar color="primary">
+    <ion-title>Edit Services</ion-title>
+    <ion-buttons end>
+      <button ion-button="" clear (click)="dismiss()" icon-only="">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <section class="content_" *ngIf="categories.length > 0">
+    <div class="heading_">
+      <h2>Categories</h2>
+    </div>
+
+    <ion-row align-items-center margin-horizontal>
+      <ion-col col-auto float-left *ngFor="let category of categories">
+        <button ion-button round [ngClass]="{'gradient-bg':category.selected,'outline':!category.selected}"
+                (click)="ClickedCat(category)" style="margin-bottom: 15px;">{{category.name}}</button>
+      </ion-col>
+    </ion-row>
+  </section>
+
+  <section class="content_" *ngIf="my_services.length > 0">
+    <div class="heading_">
+      <h2>Services</h2>
+    </div>
+
+    <ion-row align-items-center margin-horizontal>
+      <ion-col col-auto float-left *ngFor="let service of my_services">
+        <button ion-button round [ngClass]="{'gradient-bg':service.selected,'outline':!service.selected}"
+                (click)="service.selected = !service.selected" style="margin-bottom: 15px;">{{service.title}}</button>
+      </ion-col>
+    </ion-row>
+  </section>
+
+
+</ion-content>
+
+
+<ion-footer padding>
+  <button color="primary" ion-button block round (click)="SubmitForm()">
+    Save
+  </button>
+</ion-footer>

@@ -1,0 +1,103 @@
+page-search {
+  .spinner-container{
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+  }
+
+  .back-button_{
+    position: absolute;
+    z-index: 999;
+  }
+
+  .back-button_{
+    //top: 10px;
+    left: 10px;
+  }
+  .searchbar-search-icon{
+    display: none !important;
+  }
+
+  ion-row{
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  .searchbar-clear-icon{
+    display: block !important;
+  }
+
+  .card-img {
+    height: 200px;
+    position: relative;
+
+    img-loader {
+      background-size: cover !important;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: -9999;
+
+      &:after {
+        content: '';
+        position: absolute;
+        width: inherit;
+        height: inherit;
+        top: 0;
+        left: 0;
+        background: rgba(0, 0, 0, 0.5);
+      }
+    }
+
+    div {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      align-self: center;
+      justify-content: center;
+      height: 100%;
+      span {
+        border-radius: 16px;
+        padding: 4px 16px;
+      }
+    }
+  }
+
+  .card {
+    width: 100%;
+    .card-img {
+      height: 150px;
+      img-loader {
+        background-size: cover !important;
+      }
+    }
+    .card-content {
+      padding: 6px !important;
+    }
+  }
+
+  ion-note {
+    font-size: 12px;
+    align-self: flex-start;
+    margin-top: 14px;
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+
+    &.rating li {
+      padding: 5px 0 !important;
+      background: none;
+      color: color($colors, primary, base);
+
+      ion-icon {
+        font-size: 16px;
+      }
+    }
+  }
+
+
+}

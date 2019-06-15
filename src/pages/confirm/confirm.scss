@@ -1,0 +1,50 @@
+page-confirm {
+  font-style: normal;
+  h2,p{
+    color: #767c7a;
+  }
+  .p_button{
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  ion-avatar img {
+    border-radius: 0 !important;
+    overflow: hidden;
+    width: 50px;
+    background-color: transparent;
+    height: auto !important;
+  }
+  .item-md [item-end] {
+    margin: 0 0 0 0;
+  }
+  .item-md ion-avatar.avatar{
+    text-align: center;
+    margin: 8px 16px 8px -8px !important;
+    img{
+      display: block;
+      margin: 0 auto;
+      height: 30px !important;
+      width: auto !important;
+      border-radius: 0 !important;
+    }
+  }
+
+  .ins-icon{
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-bottom: 2px;
+    padding-top: 2px;
+  }
+  .ins-icon1{
+    padding-bottom: 10px;
+    margin-right: -10px;
+    padding-top: 10px;
+  }
+  .book-it{
+    padding: 10px;
+    width: 100%;
+    bottom: 30px;
+    position: absolute;
+  }
+}

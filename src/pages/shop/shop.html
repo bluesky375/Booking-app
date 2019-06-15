@@ -1,0 +1,147 @@
+<ion-header no-border="">
+  <ion-navbar color="primary">
+    <ion-title>{{ provider?.name }}</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="onShare()">
+        <ion-icon name="share"></ion-icon>
+      </button>
+      <button ion-button="" clear (click)="dismiss()" icon-only="">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content #container>
+
+  <ion-refresher (ionRefresh)="onReload($event)">
+
+    <ion-refresher-content pullingText="Pull to Refresh" refreshingText="Refreshing..."></ion-refresher-content>
+
+  </ion-refresher>
+
+  <div class="card-img">
+    <img-loader [src]="provider?.url" (load)="onImageLoad($event)"></img-loader>
+  </div>
+
+
+  <div class="card-container">
+    <!--<ion-fab right top>-->
+      <!--<button ion-fab (click)="onLike()">-->
+        <!--<ion-icon [name]="isLiked ? 'heart' : 'heart-outline'"></ion-icon>-->
+      <!--</button>-->
+    <!--</ion-fab>-->
+    <ion-card class="radius-top card-top" color="light">
+      <ion-card-content>
+        <p margin-top float-end>
+          <ion-icon color="dark" name="pin"></ion-icon>
+          <span color="dark" class="text-small" ion-text>
+            {{ provider?.description }}
+          </span>
+        </p>
+        <div class="content_">
+          <div class="heading_" style="margin-top: 0">
+            <h2>{{ provider?.name }}</h2>
+          </div>
+        </div>
+
+        <span *ngIf="provider?.reviews.length > 0" style="display: flex">
+            <star-rating [starType]="'svg'" [size]="'medium'" [readOnly]="true" [showHalfStars]="false" [rating]="provider?.rating"></star-rating>
+            <span class="dark">({{provider?.reviews.length}})</span>
+        </span>
+
+        <p  margin-top ion-text color="dark">{{ provider?.title }}</p>
+
+        <section class="content_" *ngIf="services.length > 0">
+          <div class="heading_">
+            <h2>Services</h2>
+          </div>
+
+          <ion-scroll scrollX="true" direction="x" style="height: 80px">
+            <ion-row nowrap align-items-center margin-horizontal>
+              <ion-col col-auto float-left *ngFor="let service of services">
+                <button ion-button round [ngClass]="{'gradient-bg':service.selected,'outline':!service.selected}" (click)="SelectService(service)" style="margin-bottom: 15px;">{{service.title}}</button>
+              </ion-col>
+            </ion-row>
+          </ion-scroll>
+        </section>
+
+
+        <ion-row class="buttons_">
+          <ion-col col-4 text-center tapabble [class.disabled]="!provider?.number" (click)="onCall()">
+            <div>
+              <ion-icon name="call" color="primary"></ion-icon>
+            </div>
+            <p class="bold" ion-text color="primary">Call</p>
+          </ion-col>
+          <ion-col col-4 text-center tapabble (click)="goToMap()">
+            <div>
+              <ion-icon name="map" color="primary"></ion-icon>
+            </div>
+            <p class="bold" ion-text color="primary">Directions</p>
+          </ion-col>
+          <ion-col col-4 text-center tapabble  (click)="Book()">
+            <div>
+              <ion-icon name="stopwatch" color="primary"></ion-icon>
+            </div>
+            <p class="bold" ion-text color="primary">Book</p>
+          </ion-col>
+        </ion-row>
+
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <section padding margin-top>
+
+    <ion-row align-items-center>
+      <ion-col col-12>
+        <h5 no-margin>
+          <ion-icon class="text-medium" name="chatbubbles" color="accent"></ion-icon>
+          Comments and Reactions
+        </h5>
+      </ion-col>
+      <!--<ion-col col-4 text-end>-->
+        <!--<button class="bold" ion-button small block round color="primary" (click)="openPage('AddReviewPage', { providerId: provider._id })">-->
+          <!--Post a Review-->
+        <!--</button>-->
+      <!--</ion-col>-->
+    </ion-row>
+
+    <div *ngIf="!provider?.reviews.length" text-center>
+      <p class="text-medium" color="accent">
+        No reviews found
+      </p>
+    </div>
+
+    <ion-list no-lines>
+      <div margin-bottom padding class="radius light-bg border" *ngFor="let review of provider?.reviews">
+        <ion-item no-padding color="light">
+          <ion-avatar item-start>
+            <img defaultImage="./assets/imgs/avatar.png"
+                 [lazyLoad]="review.user?.avatar?.url"
+                 [scrollObservable]="container.ionScroll" />
+          </ion-avatar>
+          <h2 class="bold no-margin">{{ review.user?.username }}</h2>
+          <p class="text-small no-margin" ion-text color="accent">
+            {{ review.timeposted | date:'mediumDate' }}
+          </p>
+          <star-rating *ngIf="review.rating" [starType]="'svg'" [size]="'small'" [readOnly]="true" [showHalfStars]="false" [rating]="review.rating"></star-rating>
+        </ion-item>
+        <ion-row>
+          <ion-col no-padding col-12>
+            <p class="text-medium bold no-margin" ion-text color="dark">{{ review.comment }}</p>
+          </ion-col>
+        </ion-row>
+      </div>
+    </ion-list>
+    <!--<div text-center *ngIf="reviews.length">-->
+      <!--<button class="bold" ion-button icon-right clear color="dark" >-->
+        <!--View all reviews-->
+        <!--<ion-icon name="arrow-round-forward"></ion-icon>-->
+      <!--</button>-->
+    <!--</div>-->
+
+  </section>
+
+</ion-content>

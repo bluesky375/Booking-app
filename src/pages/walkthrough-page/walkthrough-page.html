@@ -1,0 +1,50 @@
+<ion-content>
+  <ion-slides pager>
+
+    <ion-slide class="slide-1">
+      <div class="img-wrapper">
+        <img src="assets/imgs/slide-1.png" class="slide-image" />
+      </div>
+      <div class="caption">
+        <h2 class="slide-title bold" ion-text color="light">
+          Discover new services around you
+        </h2>
+      </div>
+    </ion-slide>
+
+    <ion-slide class="slide-2">
+      <div class="img-wrapper">
+        <img src="assets/imgs/slide-2.png" class="slide-image" />
+      </div>
+      <div class="caption">
+        <h2 class="slide-title bold" ion-text color="light">
+          1000s of vendors available to you with a click of search
+        </h2>
+      </div>
+    </ion-slide>
+
+    <ion-slide class="slide-3">
+      <div class="img-wrapper">
+        <img src="assets/imgs/slide-3.png" class="slide-image" />
+      </div>
+      <div class="caption">
+        <h2 class="slide-title bold" ion-text color="light">
+          Like or Review your favorite service providers
+        </h2>
+      </div>
+    </ion-slide>
+
+    <ion-slide class="slide-4">
+      <div class="caption">
+        <h2 ion-text color="light">Ready to explore?</h2>
+      </div>
+      <button ion-button large icon-right round color="light" (click)="goToHome()">
+        Get started
+        <ion-icon name="arrow-forward"></ion-icon>
+      </button>
+    </ion-slide>
+  </ion-slides>
+  <button class="skip-button bold" ion-button clear block color="light" (click)="goToHome()">
+    Skip
+  </button>
+</ion-content>

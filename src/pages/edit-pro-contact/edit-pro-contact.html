@@ -1,0 +1,59 @@
+<ion-header no-border>
+  <ion-navbar color="primary">
+    <ion-title>Edit Contact Info</ion-title>
+    <ion-buttons end>
+      <button ion-button="" clear (click)="dismiss()" icon-only="">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+<ion-content>
+<ion-slides>
+  <ion-slide id="slide5" padding class="slide-w">
+    <div class="content">
+      <h3>EMAIL AND PHONE NUMBER</h3>
+      <div class="order-modal">
+          <ion-item>
+            <ion-input type="email" name="email" placeholder="Email" [(ngModel)]="email"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-input placeholder="Number" type="text" name="number" [(ngModel)]="number"></ion-input>
+          </ion-item>
+
+          <div padding>
+            <button ion-button color="primary" class="navBtn" (click)="Submit()" block round>SUBMIT</button>
+          </div>
+
+      </div>
+    </div>
+  </ion-slide>
+  <ion-slide id="slide4" padding class="slide-w">
+    <div class="content">
+      <h3>ENTER VERIFICATION CODE</h3>
+      <p class="change"> <span *ngIf="!passed30">1:</span>{{timer}}</p>
+      <div class="order-modal">
+
+          <ion-item>
+            <ion-input type="text" name="code" placeholder="Code" [(ngModel)]="Vcode"></ion-input>
+          </ion-item>
+
+          <div padding>
+            <button ion-button color="light" (click)="SubmitCode()" block round>VERIFY</button>
+          </div>
+
+          <div padding>
+            <button type="button" class="bold" ion-button block clear color="primary" (click)="SwitchNumber();">
+              CHANGE NUMBER
+            </button>
+          </div>
+
+      </div>
+    </div>
+  </ion-slide>
+
+
+</ion-slides>
+</ion-content>

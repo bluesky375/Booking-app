@@ -1,0 +1,131 @@
+page-calendar {
+  font-style: normal;
+  h2,p{
+    color: #767c7a;
+  }
+
+  h2.date_{
+    //text-align: center;
+  }
+
+  .outline{
+    background-color: transparent;
+    color: color($colors, secondary, base);
+    border: 1px solid color($colors, secondary, base);
+  }
+
+  .calendar-container{
+    padding: 10px;
+    //border-radius: 10px;
+    color: #ffffff;
+
+    [col-1] {
+      -webkit-box-flex: 0;
+      -webkit-flex: 0 0 8.33333%;
+      -ms-flex: 0 0 8.33333%;
+      flex: 0 0 14.285714285714286%;
+      width: 14.285714285714286%;
+      max-width: 14.285714285714286%;
+    }
+    .col {
+      text-align: center;
+      position: relative;
+      padding: 5px;
+    }
+    .last-month, .next-month {
+      color: #999999;
+      font-size: 90%;
+    }
+    .currentDate, .otherDate,.selected-date {
+      padding: 5px;
+    }
+    .currentDate,.selected-date{
+      position: absolute;
+      padding-left: 10px;
+      padding-right: 10px;
+      border-radius: 40px;
+      left: 8px;
+      top: 0;
+    }
+    .currentDate {
+      background-color: #000000;
+      color: #f5a623;
+      font-weight: bold;
+    }
+    .selected-date {
+      background-color: #2d2d2d;
+    }
+    .calendar-header {
+
+    }
+    .event-bullet {
+      margin: 2px auto;
+      height: 5px;
+      width: 5px;
+      background-color: green;
+      border-radius: 30px;
+    }
+
+    .unselected-date {
+      border: none;
+    }
+    .calendar-body {
+      .grid {
+        padding: 0;
+      }
+      .col:last-child {
+        border-right: none;
+      }
+      .calendar-weekday, .calendar-date {
+        text-align: center;
+        margin: 0;
+      }
+      .calendar-weekday {
+
+      }
+      .calendar-date {
+
+      }
+    }
+
+  }
+
+  .p_button{
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  ion-avatar img {
+    border-radius: 0 !important;
+    overflow: hidden;
+    width: 50px;
+    background-color: transparent;
+    height: auto !important;
+  }
+  .item-md [item-end] {
+    margin: 0 0 0 0;
+  }
+  .item-md ion-avatar.avatar{
+    text-align: center;
+    margin: 8px 16px 8px -8px !important;
+    img{
+      display: block;
+      margin: 0 auto;
+      height: 30px !important;
+      width: auto !important;
+      border-radius: 0 !important;
+    }
+  }
+
+  .ins-icon{
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-bottom: 2px;
+    padding-top: 2px;
+  }
+  .ins-icon1{
+    padding-bottom: 10px;
+    margin-right: -10px;
+    padding-top: 10px;
+  }
+}

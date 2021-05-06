@@ -82,7 +82,7 @@
     "sw-toolbox": "3.6.0",
     "sweetalert": "^2.1.0",
     "uk.co.workingedge.phonegap.plugin.launchnavigator": "^4.2.2",
-    "underscore": "^1.9.1",
+    "underscore": "^1.12.1",
     "zone.js": "0.8.26"
   },
   "devDependencies": {
